@@ -1,23 +1,17 @@
-import java.util.LinkedList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class TRCApp {
     public static void main(String[] args) {
-        LinkedList<String> train = new LinkedList<>();
+        Set<String> trainFormation = new LinkedHashSet<>();
 
-        train.add("Engine");
-        train.add("Sleeper");
-        train.add("AC");
-        train.add("Cargo");
-        train.add("Guard");
+        trainFormation.add("Engine");
+        trainFormation.add("Sleeper");
+        trainFormation.add("Cargo");
+        trainFormation.add("Guard");
 
-        train.add(2, "Pantry Car");
+        trainFormation.add("Sleeper");
 
-        train.removeFirst();
-        train.removeLast();
-
-        System.out.println("Final ordered train consist:");
-        for (String bogie : train) {
-            System.out.println(bogie);
-        }
+        System.out.println("Final Train Formation: " + trainFormation);
     }
 }
