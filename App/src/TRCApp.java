@@ -1,56 +1,38 @@
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-class Bogie {
-    private String type;
-    private int capacity;
-
-    public Bogie(String type, int capacity) {
-        this.type = type;
-        this.capacity = capacity;
-    }
-
-    public int getCapacity() {
-        return capacity;
-    }
-}
-
-public class TRCApp {
+public class TrainConsistApp {
     public static void main(String[] args) {
-        testTotalCapacity();
-        testEmptyList();
-    }
+        Scanner scanner = new Scanner(System.in);
 
-    public static void testTotalCapacity() {
-        List<Bogie> bogies = Arrays.asList(
-                new Bogie("Sleeper", 72),
-                new Bogie("AC Chair", 56),
-                new Bogie("General", 90)
-        );
+        String trainIdPattern = "TRN-\\d{4}";
+        String cargoCodePattern = "PET-[A-Z]{2}";
 
-        int totalSeats = bogies.stream()
-                .map(Bogie::getCapacity)
-                .reduce(0, Integer::sum);
+        Pattern tPattern = Pattern.compile(trainIdPattern);
+        Pattern cPattern = Pattern.compile(cargoCodePattern);
 
-        if (totalSeats == 218) {
-            System.out.println("testTotalCapacity: PASSED");
+        System.out.print("Enter Train ID: ");
+        String trainIdInput = scanner.nextLine();
+
+        System.out.print("Enter Cargo Code: ");
+        String cargoCodeInput = scanner.nextLine();
+
+        Matcher tMatcher = tPattern.matcher(trainIdInput);
+        Matcher cMatcher = cPattern.matcher(cargoCodeInput);
+
+        if (tMatcher.matches()) {
+            System.out.println("Train ID " + trainIdInput + " is valid.");
         } else {
-            System.out.println("testTotalCapacity: FAILED (Expected 218, got " + totalSeats + ")");
+            System.out.println("Invalid Train ID: " + trainIdInput + ". Format should be TRN-1234.");
         }
-    }
 
-    public static void testEmptyList() {
-        List<Bogie> emptyBogies = Arrays.asList();
-
-        int totalSeats = emptyBogies.stream()
-                .map(Bogie::getCapacity)
-                .reduce(0, Integer::sum);
-
-        if (totalSeats == 0) {
-            System.out.println("testEmptyList: PASSED");
+        if (cMatcher.matches()) {
+            System.out.println("Cargo Code " + cargoCodeInput + " is valid.");
         } else {
-            System.out.println("testEmptyList: FAILED");
+            System.out.println("Invalid Cargo Code: " + cargoCodeInput + ". Format should be PET-AB.");
         }
+
+        scanner.close();
     }
 }
