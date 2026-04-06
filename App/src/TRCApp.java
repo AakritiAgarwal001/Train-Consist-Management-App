@@ -30,7 +30,6 @@ class GoodsBogie {
             throw new CargoSafetyException("Unsafe Assignment: Petroleum cannot be carried in a Rectangular bogie.");
         }
     }
-
     public String getCargoType() {
         return cargoType;
     }
