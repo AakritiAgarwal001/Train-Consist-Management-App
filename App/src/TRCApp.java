@@ -1,19 +1,24 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class TRCApp {
-
     public static void main(String[] args) {
-        System.out.println("================================");
-        System.out.println("=== Train Consist Management App ===");
-        System.out.println("================================");
+        ArrayList<String> passengerBogies = new ArrayList<>();
 
-        List<String> trainConsist = new ArrayList<>();
+        passengerBogies.add("Sleeper");
+        passengerBogies.add("AC Chair");
+        passengerBogies.add("First Class");
 
-        System.out.println("Train initialized successfully...");
-        System.out.println("Initial Bogie Count : " + trainConsist.size());
-        System.out.println("Current Train Consist : " + trainConsist);
+        System.out.println("Current Train Consist: " + passengerBogies);
 
-        System.out.println("\nSystem ready for operations...");
+        passengerBogies.remove("AC Chair");
+        System.out.println("After removing AC Chair: " + passengerBogies);
+
+        if (passengerBogies.contains("Sleeper")) {
+            System.out.println("Status: Sleeper bogie is attached to the train.");
+        } else {
+            System.out.println("Status: Sleeper bogie is not found.");
+        }
+
+        System.out.println("Final Train Consist: " + passengerBogies);
     }
 }
