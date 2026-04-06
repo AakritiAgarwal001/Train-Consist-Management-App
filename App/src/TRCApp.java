@@ -1,7 +1,6 @@
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 class Bogie {
     private String type;
@@ -12,46 +11,46 @@ class Bogie {
         this.capacity = capacity;
     }
 
-    public String getType() {
-        return type;
-    }
-
     public int getCapacity() {
         return capacity;
-    }
-
-    @Override
-    public String toString() {
-        return "Capacity -> " + capacity;
     }
 }
 
 public class TRCApp {
     public static void main(String[] args) {
-        List<Bogie> bogies = new ArrayList<>();
-        bogies.add(new Bogie("Sleeper", 72));
-        bogies.add(new Bogie("AC Chair", 56));
-        bogies.add(new Bogie("First Class", 24));
-        bogies.add(new Bogie("Sleeper", 70));
-        bogies.add(new Bogie("AC Chair", 60));
+        testTotalCapacity();
+        testEmptyList();
+    }
 
-        System.out.println("==========================================");
-        System.out.println("UC9 - Group Bogies by Type");
-        System.out.println("==========================================\n");
+    public static void testTotalCapacity() {
+        List<Bogie> bogies = Arrays.asList(
+                new Bogie("Sleeper", 72),
+                new Bogie("AC Chair", 56),
+                new Bogie("General", 90)
+        );
 
-        System.out.println("All Bogies:");
-        bogies.forEach(b -> System.out.println(b.getType() + " -> " + b.getCapacity()));
+        int totalSeats = bogies.stream()
+                .map(Bogie::getCapacity)
+                .reduce(0, Integer::sum);
 
-        Map<String, List<Bogie>> groupedBogies = bogies.stream()
-                .collect(Collectors.groupingBy(Bogie::getType));
+        if (totalSeats == 218) {
+            System.out.println("testTotalCapacity: PASSED");
+        } else {
+            System.out.println("testTotalCapacity: FAILED (Expected 218, got " + totalSeats + ")");
+        }
+    }
 
-        System.out.println("\nGrouped Bogies:\n");
-        groupedBogies.forEach((type, list) -> {
-            System.out.println("Bogie Type: " + type);
-            list.forEach(System.out::println);
-            System.out.println();
-        });
+    public static void testEmptyList() {
+        List<Bogie> emptyBogies = Arrays.asList();
 
-        System.out.println("UC9 grouping completed...");
+        int totalSeats = emptyBogies.stream()
+                .map(Bogie::getCapacity)
+                .reduce(0, Integer::sum);
+
+        if (totalSeats == 0) {
+            System.out.println("testEmptyList: PASSED");
+        } else {
+            System.out.println("testEmptyList: FAILED");
+        }
     }
 }
