@@ -1,24 +1,18 @@
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TRCApp {
     public static void main(String[] args) {
-        ArrayList<String> passengerBogies = new ArrayList<>();
+        Set<String> bogieIds = new HashSet<>();
 
-        passengerBogies.add("Sleeper");
-        passengerBogies.add("AC Chair");
-        passengerBogies.add("First Class");
+        bogieIds.add("BG101");
+        bogieIds.add("BG102");
+        bogieIds.add("BG103");
+        bogieIds.add("BG101");
 
-        System.out.println("Current Train Consist: " + passengerBogies);
-
-        passengerBogies.remove("AC Chair");
-        System.out.println("After removing AC Chair: " + passengerBogies);
-
-        if (passengerBogies.contains("Sleeper")) {
-            System.out.println("Status: Sleeper bogie is attached to the train.");
-        } else {
-            System.out.println("Status: Sleeper bogie is not found.");
+        System.out.println("Unique Bogie IDs in the Train Consist:");
+        for (String id : bogieIds) {
+            System.out.println(id);
         }
-
-        System.out.println("Final Train Consist: " + passengerBogies);
     }
 }
