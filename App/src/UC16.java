@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class UseCase16TrainConsistMgmt {
+public class UC16 {
 
     public static void bubbleSort(int[] arr) {
         int n = arr.length;
